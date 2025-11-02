@@ -42,6 +42,11 @@ jobs:
     - name: Terraform Init
       id: init
       run: terraform init -backend-config=env/backend.tfvars
+
+    - name: Terraform Graph
+      id: graph
+      run: terraform graph | dot -Tpng > graph.png
+
     - name: Terraform Apply
       id: apply
       run: terraform apply -no-color -var-file env/project.tfvars -auto-approve

@@ -48,7 +48,9 @@ API pozostanie aktywne nawet po usunięciu infrastruktury Terraformem.
    ![img.png](images/Screenshot4.png)
    
 7. Reach YARN UI
-
+   (wykonujemy wszystko w terminalu linux)
+   Po poprawnym zalgowoaniu używając komendy: gcloud auth login
+   Oraz po zakończeniu wykonania Terraform, należy wpisać poniższą komendę.
    Komenda:
    gcloud compute ssh tbd-cluster-m --project tbd-2025z-5 --zone europe-west1-b --tunnel-through-iap -- -N -L 8088:localhost:8088
 

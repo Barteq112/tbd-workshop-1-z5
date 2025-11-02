@@ -29,10 +29,10 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
    Udostępnienie rejestrów obrazów Dockera w GCP wraz z włączeniem wymaganych API.
 
    Tworzone zasoby:
-   google_project_service.api - Ten zasób włącza Google Artifact Registry API w danym projekcie GCP i nadaje lokalną nazwę "api",
+   - google_project_service.api - Ten zasób włącza Google Artifact Registry API w danym projekcie GCP i nadaje lokalną nazwę "api",
 tak aby można było tworzyć repozytoria Dockera i przechowywać obrazy kontenerów.
 API pozostanie aktywne nawet po usunięciu infrastruktury Terraformem.
-    google_artifact_registry_repository.registry - Tworzy repozytorium Artifact Registry w regionie Europe (pod warunkiem że zostało utworzone api), z włączonym formatem Docker i pozwala nadpisywać tagi obrazów. Dodaje mu opis "TBD Docker repository" i ustawia typ na Dockera, któremu pozwala na nadpisywanie tagów.
+    - google_artifact_registry_repository.registry - Tworzy repozytorium Artifact Registry w regionie Europe (pod warunkiem że zostało utworzone api), z włączonym formatem Docker i pozwala nadpisywać tagi obrazów. Dodaje mu opis "TBD Docker repository" i ustawia typ na Dockera, któremu pozwala na nadpisywanie tagów.
 
    Zmienne na wejściu:
    - project_name (nazwa projektu)

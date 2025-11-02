@@ -19,7 +19,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
   
     ![img.png](images/Screenshot1.png)
-
+    ![img.png](images/result_1.png)
 
 5. Analyze terraform code. Play with terraform plan, terraform graph to investigate different modules.
 

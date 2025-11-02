@@ -47,6 +47,9 @@ jobs:
       id: plan
       run: terraform plan -no-color -var-file=env/project.tfvars -out=tfplan
 
+    - name: Install Graphviz
+      run: sudo apt-get update && sudo apt-get install -y graphviz
+
     - name: Terraform Graph
       id: graph
       run: terraform graph | dot -Tpng > graph.png

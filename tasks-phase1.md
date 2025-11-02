@@ -45,7 +45,7 @@ API pozostanie aktywne nawet po usunięciu infrastruktury Terraformem.
    Wyjścia:
      - registry_hostname - zwraca nazwę rejestru kontenerów GCP
      
-   ![img.png](images/graph.png)
+   ![img.png](images/Screenshot4.png)
    
 7. Reach YARN UI
 

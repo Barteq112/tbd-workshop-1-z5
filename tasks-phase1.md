@@ -17,7 +17,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
     
     2. Create PR from this branch to **YOUR** master and merge it to make new release. 
     
-    ![img.png](images/Screenshot from 2025-11-02 20-24-26.png)
+    ![img.png](images/Screenshot1.png)
 
 
 5. Analyze terraform code. Play with terraform plan, terraform graph to investigate different modules.

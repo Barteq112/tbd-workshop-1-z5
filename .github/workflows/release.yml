@@ -42,18 +42,7 @@ jobs:
     - name: Terraform Init
       id: init
       run: terraform init -backend-config=env/backend.tfvars
-
-    - name: Terraform Plan
-      id: plan
-      run: terraform plan -no-color -var-file=env/project.tfvars -out=tfplan
-
-    - name: Install Graphviz
-      run: sudo apt-get update && sudo apt-get install -y graphviz
-
-    - name: Terraform Graph
-      id: graph
-      run: terraform graph | dot -Tpng > graph.png
-
+      
     - name: Terraform Apply
       id: apply
       run: terraform apply -no-color -var-file env/project.tfvars -auto-approve

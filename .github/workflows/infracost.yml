@@ -1,8 +1,7 @@
 name: Infracost cost estimate
 
 on:
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   infracost:
@@ -21,7 +20,7 @@ jobs:
       - name: Setup Infracost
         uses: infracost/actions/setup@v3
         with:
-          api-key: ${{ secrets.INFRACOST_API_KEY}}
+          api-key: ${{ secrets.INFRACOST_API_KEY }}
 
       - name: Generate cost estimate
         run: |

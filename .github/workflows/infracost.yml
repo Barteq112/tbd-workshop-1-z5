@@ -5,7 +5,6 @@ on:
 
 jobs:
   infracost:
-    name: Infracost
     runs-on: ubuntu-latest
 
     steps:
@@ -22,16 +21,9 @@ jobs:
         with:
           api-key: ${{ secrets.INFRACOST_API_KEY }}
 
-      - name: Generate cost estimate
+      - name: Show cost estimate
         run: |
           infracost breakdown \
             --path . \
             --usage-file infracost-usage.yml \
-            --format json \
-            --out-file infracost.json
-
-      - name: Post cost estimate comment
-        uses: infracost/actions/comment@v3
-        with:
-          path: infracost.json
-          behavior: update
+            --format table

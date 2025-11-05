@@ -2,12 +2,12 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
   
 ![img.png](doc/figures/destroy.png)
 
-1. Authors:
-Group: ***5***
-   Bartosz Sędzikowski
-   Julian Żebrecki
-   Oskar Gorgis
-   ***https://github.com/Barteq112/tbd-workshop-1-z5/blob/master/tasks-phase1.md***
+1. Group: ***5*** <br>
+   Authors:
+   Bartosz Sędzikowski<br>
+   Julian Żebrecki<br>
+   Oskar Gorgis<br>
+   ***https://github.com/Barteq112/tbd-workshop-1-z5/blob/master/tasks-phase1.md*** <br>
    ***https://github.com/Barteq112/tbd-workshop-1-z5/***   
 3. Follow all steps in README.md.
 

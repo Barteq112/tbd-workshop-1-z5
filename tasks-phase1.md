@@ -66,11 +66,110 @@ API pozostanie aktywne nawet po usunięciu infrastruktury Terraformem.
 
 10. Create a new PR and add costs by entering the expected consumption into Infracost
 For all the resources of type: `google_artifact_registry`, `google_storage_bucket`, `google_service_networking_connection`
-create a sample usage profiles and add it to the Infracost task in CI/CD pipeline. Usage file [example](https://github.com/infracost/infracost/blob/master/infracost-usage-example.yml) 
+create a sample usage profiles and add it to the Infracost task in CI/CD pipeline. Usage file [example](https://github.com/infracost/infracost/blob/master/infracost-usage-example.yml)
 
-   ***place the expected consumption you entered here***
+We used infracost-usage.yml file to define the expected consumption. The file is located in the root directory of the project. Content (note: the values are only for example purposes):
+<pre> version: 0.1
 
-   ***place the screenshot from infracost output here***
+resource_usage:
+
+google_artifact_registry_repository.my_artifact_registry:
+    storage_gb: 0.7 # Total data stored in the repository in GB
+    monthly_egress_data_transfergb: # Monthly data delivered from the artifact registry repository in GB. You can specify any number of Google Cloud regions below, replacing - for  e.g.:
+      europe_west1: 100 # GB of data delivered from the artifact registry to europe-west1.
+google_storage_bucket.my_storage_bucket:
+    storage_gb: 150                   # Total size of bucket in GB.
+    monthly_class_a_operations: 40000 # Monthly number of class A operations (object adds, bucket/object list).
+    monthly_class_b_operations: 20000 # Monthly number of class B operations (object gets, retrieve bucket/object metadata).
+    monthly_data_retrieval_gb: 500    # Monthly amount of data retrieved in GB.
+    monthly_egress_data_transfer_gb:  # Monthly data transfer from Cloud Storage to the following, in GB:
+      same_continent: 550  # Same continent.
+      worldwide: 12500     # Worldwide excluding Asia, Australia.
+      asia: 0              # Asia excluding China, but including Hong Kong.
+      china: 0              # China excluding Hong Kong.
+      australia: 0        # Australia.
+google_service_networking_connection.my_connection:
+    monthly_egress_data_transfer_gb: # Monthly VM-VM data transfer from VPN gateway to the following, in GB:
+      same_region: 250               # VMs in the same Google Cloud region.
+      us_or_canada: 0              # From a Google Cloud region in the US or Canada to another Google Cloud region in the US or Canada.
+      europe: 70                      # Between Google Cloud regions within Europe.
+      asia: 0                       # Between Google Cloud regions within Asia.
+      south_america: 0             # Between Google Cloud regions within South America.
+      oceania: 0                     # Indonesia and Oceania to/from any Google Cloud region.
+      worldwide: 0                 # to a Google Cloud region on another continent. </pre>
+      
+Infracost output assuming usage above:
+<pre> Project: mlops
+Module path: mlops
+
+ Name                                                                                               Monthly Qty  Unit                      Monthly Cost   
+                                                                                                                                                          
+ module.gcp_mlflow_appengine.google_sql_database_instance.mlflow_cloudsql_instance                                                                        
+ ├─ SQL instance (db-g1-small, zonal)                                                                       730  hours                           $25.55   
+ ├─ Storage (SSD, zonal)                                                                                     10  GB                               $1.70   
+ └─ Backups                                                                                  Monthly cost depends on usage: $0.08 per GB                  
+                                                                                                                                                          
+ module.gcp_mlflow_appengine.google_secret_manager_secret_version.mlflow_db_password_secret                                                               
+ ├─ Active secret versions                                                                                    1  versions                         $0.06   
+ └─ Access operations                                                                        Monthly cost depends on usage: $0.03 per 10K requests        
+                                                                                                                                                          
+ module.gcp_mlflow_appengine.google_secret_manager_secret.mlflow_db_password_secret                                                                       
+ ├─ Active secret versions                                                                   Monthly cost depends on usage: $0.06 per versions            
+ ├─ Access operations                                                                        Monthly cost depends on usage: $0.03 per 10K requests        
+ └─ Rotation notifications                                                                   Monthly cost depends on usage: $0.05 per rotations           
+                                                                                                                                                          
+ module.gcp_mlflow_appengine.google_service_networking_connection.private_vpc_connection                                                                  
+ └─ Network egress                                                                                                                                        
+    ├─ Traffic within the same region                                                        Monthly cost depends on usage: $0.02 per GB                  
+    ├─ Traffic within the US or Canada                                                       Monthly cost depends on usage: $0.02 per GB                  
+    ├─ Traffic within Europe                                                                 Monthly cost depends on usage: $0.02 per GB                  
+    ├─ Traffic within Asia                                                                   Monthly cost depends on usage: $0.08 per GB                  
+    ├─ Traffic within South America                                                          Monthly cost depends on usage: $0.14 per GB                  
+    ├─ Traffic to/from Indonesia and Oceania                                                 Monthly cost depends on usage: $0.10 per GB                  
+    └─ Traffic between continents (excludes Oceania)                                         Monthly cost depends on usage: $0.08 per GB                  
+                                                                                                                                                          
+ module.gcp_mlflow_appengine.google_storage_bucket.mlflow_artifacts_bucket                                                                                
+ ├─ Storage (multi_regional)                                                                 Monthly cost depends on usage: $0.026 per GiB                
+ ├─ Object adds, bucket/object list (class A)                                                Monthly cost depends on usage: $0.10 per 10k operations      
+ ├─ Object gets, retrieve bucket/object metadata (class B)                                   Monthly cost depends on usage: $0.004 per 10k operations     
+ └─ Network egress                                                                                                                                        
+    ├─ Data transfer in same continent                                                       Monthly cost depends on usage: $0.02 per GB                  
+    ├─ Data transfer to worldwide excluding Asia, Australia (first 1TB)                      Monthly cost depends on usage: $0.12 per GB                  
+    ├─ Data transfer to Asia excluding China, but including Hong Kong (first 1TB)            Monthly cost depends on usage: $0.12 per GB                  
+    ├─ Data transfer to China excluding Hong Kong (first 1TB)                                Monthly cost depends on usage: $0.23 per GB                  
+    └─ Data transfer to Australia (first 1TB)                                                Monthly cost depends on usage: $0.19 per GB                  
+                                                                                                                                                          
+ module.gcp_registry.google_container_registry.registry                                                                                                   
+ ├─ Storage (standard)                                                                       Monthly cost depends on usage: $0.026 per GiB                
+ ├─ Object adds, bucket/object list (class A)                                                Monthly cost depends on usage: $0.05 per 10k operations      
+ ├─ Object gets, retrieve bucket/object metadata (class B)                                   Monthly cost depends on usage: $0.004 per 10k operations     
+ └─ Network egress                                                                                                                                        
+    ├─ Data transfer in same continent                                                       Monthly cost depends on usage: $0.02 per GB                  
+    ├─ Data transfer to worldwide excluding Asia, Australia (first 1TB)                      Monthly cost depends on usage: $0.12 per GB                  
+    ├─ Data transfer to Asia excluding China, but including Hong Kong (first 1TB)            Monthly cost depends on usage: $0.12 per GB                  
+    ├─ Data transfer to China excluding Hong Kong (first 1TB)                                Monthly cost depends on usage: $0.23 per GB                  
+    └─ Data transfer to Australia (first 1TB)                                                Monthly cost depends on usage: $0.19 per GB                  
+                                                                                                                                                          
+ Project total                                                                                                                                   $27.31   
+
+ OVERALL TOTAL                                                                                                                                  $27.31 
+
+*Usage costs were estimated using infracost-usage.yml, see docs for other options.
+
+──────────────────────────────────
+92 cloud resources were detected:
+∙ 13 were estimated
+∙ 75 were free
+∙ 4 are not supported yet, rerun with --show-skipped to see details
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Project                                            ┃ Baseline cost ┃ Usage cost* ┃ Total cost ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━┫
+┃ main                                               ┃         $0.00 ┃       $0.00 ┃      $0.00 ┃
+┃ bootstrap                                          ┃         $0.00 ┃       $0.00 ┃      $0.00 ┃
+┃ cicd_bootstrap                                     ┃         $0.00 ┃       $0.00 ┃      $0.00 ┃
+┃ mlops                                              ┃           $27 ┃       $0.00 ┃        $27 ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━┛</pre>
 
 11. Create a BigQuery dataset and an external table using SQL
     

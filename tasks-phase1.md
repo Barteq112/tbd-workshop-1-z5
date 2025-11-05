@@ -3,16 +3,17 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 ![img.png](doc/figures/destroy.png)
 
 1. Authors:
+Group: ***5***
+   Bartosz Sędzikowski
+   Julian Żebrecki
+   Oskar Gorgis
+   ***https://github.com/Barteq112/tbd-workshop-1-z5/blob/master/tasks-phase1.md***
+   ***https://github.com/Barteq112/tbd-workshop-1-z5/***   
+3. Follow all steps in README.md.
 
-   ***5***
-
-   ***https://github.com/Barteq112/tbd-workshop-1-z5/***
+4. From avaialble Github Actions select and run destroy on main branch.
    
-2. Follow all steps in README.md.
-
-3. From avaialble Github Actions select and run destroy on main branch.
-   
-4. Create new git branch and:
+5. Create new git branch and:
     1. Modify tasks-phase1.md file.
     
     2. Create PR from this branch to **YOUR** master and merge it to make new release. 
@@ -21,7 +22,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
     ![img.png](images/Screenshot1.png)
     ![img.png](images/result_1.png)
 
-5. Analyze terraform code. Play with terraform plan, terraform graph to investigate different modules.
+6. Analyze terraform code. Play with terraform plan, terraform graph to investigate different modules.
 
    Moduł gcr
    

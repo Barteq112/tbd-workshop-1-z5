@@ -7,7 +7,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
    Bartosz Sędzikowski<br>
    Julian Żebrecki<br>
    Oskar Gorgis<br>
-   ***https://github.com/Barteq112/tbd-workshop-1-z5/blob/master/tasks-phase1.md*** <br>
+   ***https://github.com/Barteq112/tbd-workshop-1-z5/blob/master/tasks-phase1.md***<br>
    ***https://github.com/Barteq112/tbd-workshop-1-z5/***   
 3. Follow all steps in README.md.
 
@@ -173,19 +173,39 @@ Module path: mlops
 
 11. Create a BigQuery dataset and an external table using SQL
     
-    ***place the code and output here***
-   
-    ***why does ORC not require a table schema?***
+    Kod do stworzenia Datasetu:
+    <pre>
+      CREATE SCHEMA test_dataset
+      OPTIONS(location = 'EU');
+    </pre>
 
-12. Find and correct the error in spark-job.py
+    Kod do dodania zewnętrznej tabeli:
+    <pre>
+      CREATE OR REPLACE EXTERNAL TABLE 'tbd-2025z-5.test_dataset.customers_external'
+      OPTIONS (
+        format = 'CSV',
+        uris = ['gs://tbd-2025z-5-data/customers.csv'],
+        skip_leading_rows = 1,
+        field_delimiter = ','
+      );
+    </pre>
+    Kod do wyświetenia danych zapytania:
+    <pre>
+      SELECT * FROM 'tbd-2025z-5.test_dataset.customers_external'
+    </pre>
+    ![img.png](images/Screenshot5.png)
+   
+    Pliki ORC mają metadane zapisane w pliku. W przeciwieństwie do takich formatów jak CSV czy JSON te nie potrzebują schematu, gdyż zawierają w sobie informacje o typie kolumn, nazwach kolumn, typie kompresji i podstawowych statystykach (np. min, max).
+    
+13. Find and correct the error in spark-job.py
 
     ***describe the cause and how to find the error***
 
-13. Add support for preemptible/spot instances in a Dataproc cluster
+14. Add support for preemptible/spot instances in a Dataproc cluster
 
     ***place the link to the modified file and inserted terraform code***
     
-14. Triggered Terraform Destroy on Schedule or After PR Merge. Goal: make sure we never forget to clean up resources and burn money.
+15. Triggered Terraform Destroy on Schedule or After PR Merge. Goal: make sure we never forget to clean up resources and burn money.
 
 Add a new GitHub Actions workflow that:
   1. runs terraform destroy -auto-approve

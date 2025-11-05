@@ -1,0 +1,38 @@
+name: Infracost cost estimate
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  infracost:
+    name: Infracost
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: Setup Infracost
+        uses: infracost/actions/setup@v3
+        with:
+          api-key: ${{ secrets.INFRACOST_API_KEY}}
+
+      - name: Generate cost estimate
+        run: |
+          infracost breakdown \
+            --path . \
+            --usage-file infracost-usage.yml \
+            --format json \
+            --out-file infracost.json
+
+      - name: Post cost estimate comment
+        uses: infracost/actions/comment@v3
+        with:
+          path: infracost.json
+          behavior: update

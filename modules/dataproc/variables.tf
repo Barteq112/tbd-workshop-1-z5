@@ -24,3 +24,9 @@ variable "image_version" {
   type    = string
   default = "2.2.69-ubuntu22"
 }
+
+variable "machine_type_preemptible" {
+  type        = string
+  default     = "n2-standard-4"
+  description = "Machine type to use for preemptible machine"
+}

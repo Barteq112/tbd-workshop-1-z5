@@ -257,6 +257,36 @@ Module path: mlops
   <pre>
   gcloud dataproc jobs submit pyspark   gs://tbd-2025z-5-code/spark-job.py   --cluster=tbd-cluster   --region=europe-west1
   </pre>
+
+
+  Otrzymne wyniki ze skryptu
+  <pre>
+    +----+--------------+
+    |word|sum_word_count|
+    +----+--------------+
+    | the|         25568|
+    |   I|         21028|
+    | and|         19649|
+    |  to|         17361|
+    |  of|         16438|
+    |   a|         13409|
+    | you|         12527|
+    |  my|         11291|
+    |  in|         10589|
+    |  is|          8735|
+    |that|          8561|
+    | not|          8395|
+    |  me|          8030|
+    | And|          7780|
+    |with|          7224|
+    |  it|          7137|
+    | his|          6811|
+    |  be|          6724|
+    |your|          6244|
+    | for|          6154|
+    +----+--------------+
+    only showing top 20 rows
+  </pre>
     
     
     

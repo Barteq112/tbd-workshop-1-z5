@@ -1,5 +1,5 @@
 IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each work session. You can recreate infrastructure by creating new PR and merging it to master.
-  # test
+
 ![img.png](doc/figures/destroy.png)
 
 1. Group: ***5*** <br>
@@ -371,5 +371,4 @@ jobs:
 
 ![img.png](images/Screenshot7.png)
 
-***write one sentence why scheduling cleanup helps in this workshop***
 Zaplanowane usuwanie zasobów pomaga w sytuacji, kiedy się zapomni o zrobieniu tego po pracy nad zadaniami, żeby nie marnować środków.

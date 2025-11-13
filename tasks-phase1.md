@@ -291,10 +291,23 @@ Module path: mlops
     
 
 15. Add support for preemptible/spot instances in a Dataproc cluster
-
-    ***place the link to the modified file and inserted terraform code***
     
-16. Triggered Terraform Destroy on Schedule or After PR Merge. Goal: make sure we never forget to clean up resources and burn money.
+    Link do zmodyfikowanego pliku
+    https://github.com/Barteq112/tbd-workshop-1-z5/blob/master/modules/dataproc/main.tf
+
+    Do pliku main.tf dodano:
+    <pre>
+      preemptible_worker_config {
+        num_instances  = 1
+        preemptibility = "PREEMPTIBLE"
+        disk_config {
+          boot_disk_type    = "pd-standard"
+          boot_disk_size_gb = 100
+        }
+      }
+    </pre>
+    
+17. Triggered Terraform Destroy on Schedule or After PR Merge. Goal: make sure we never forget to clean up resources and burn money.
 
 Add a new GitHub Actions workflow that:
   1. runs terraform destroy -auto-approve

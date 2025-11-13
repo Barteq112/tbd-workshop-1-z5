@@ -251,6 +251,11 @@ Module path: mlops
       state: FINISHED
       trackingUrl: http://tbd-cluster-m.c.tbd-2025z-5.internal.:8088/proxy/application_1763040807341_0010/
   </pre>
+
+  Skrypt został uruchomiony za pomoca komendy:
+  <prev>
+  gcloud dataproc jobs submit pyspark   gs://tbd-2025z-5-code/spark-job.py   --cluster=tbd-cluster   --region=europe-west1
+  </prev>
     
     
     

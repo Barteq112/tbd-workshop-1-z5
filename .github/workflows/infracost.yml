@@ -1,8 +1,9 @@
 name: Infracost cost estimate
 
 on:
+  
   workflow_dispatch:
-
+permissions: read-only
 jobs:
   infracost:
     runs-on: ubuntu-latest

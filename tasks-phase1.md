@@ -200,6 +200,7 @@ Module path: mlops
 13. Find and correct the error in spark-job.py
 
     ***describe the cause and how to find the error***
+    
     Skrypt został uruchomiony przez GCP Cloud Shell.
     Skrypt spark-job.py wkazywał na bucket o nazwie gs://tbd-2025z-9901-data/data/shakespeare/, aby zapisać wyniki za pomocą df.write.orc(). Spark nie mógł znaleźć podanego bucketa i zwrócił błąd:
     <pre> 
@@ -219,35 +220,37 @@ Module path: mlops
     } 
     </pre>
     W konsoli GCP pojawił się komunikat o błędzie z nazwą brakującego bucketa. Po zmiane nazwy bucketa zadania zakończyło się sukcesem.
-    <pre>Job [599fe522712b47689edeed3c9a946361] finished successfully.
-done: true
-driverControlFilesUri: gs://tbd-2025z-5-dataproc-staging/google-cloud-dataproc-metainfo/5acb7508-bc6f-43ea-8e93-c3af504b8bf2/jobs/599fe522712b47689edeed3c9a946361/
-driverOutputResourceUri: gs://tbd-2025z-5-dataproc-staging/google-cloud-dataproc-metainfo/5acb7508-bc6f-43ea-8e93-c3af504b8bf2/jobs/599fe522712b47689edeed3c9a946361/driveroutput
-jobUuid: 02e3ef2b-a0d5-32a5-b035-a1085a6e1849
-placement:
-  clusterName: tbd-cluster
-  clusterUuid: 5acb7508-bc6f-43ea-8e93-c3af504b8bf2
-pysparkJob:
-  mainPythonFileUri: gs://tbd-2025z-5-code/spark-job.py
-reference:
-  jobId: 599fe522712b47689edeed3c9a946361
-  projectId: tbd-2025z-5
-status:
-  state: DONE
-  stateStartTime: '2025-11-13T14:33:32.342647Z'
-statusHistory:
-- state: PENDING
-  stateStartTime: '2025-11-13T14:31:14.637884Z'
-- state: SETUP_DONE
-  stateStartTime: '2025-11-13T14:31:14.659482Z'
-- details: Agent reported job success
-  state: RUNNING
-  stateStartTime: '2025-11-13T14:31:14.880951Z'
-yarnApplications:
-- name: Shakespeare WordCount
-  progress: 1.0
-  state: FINISHED
-  trackingUrl: http://tbd-cluster-m.c.tbd-2025z-5.internal.:8088/proxy/application_1763040807341_0010/ </pre>
+    <pre>
+    Job [599fe522712b47689edeed3c9a946361] finished successfully.
+    done: true
+    driverControlFilesUri: gs://tbd-2025z-5-dataproc-staging/google-cloud-dataproc-metainfo/5acb7508-bc6f-43ea-8e93-c3af504b8bf2/jobs/599fe522712b47689edeed3c9a946361/
+    driverOutputResourceUri: gs://tbd-2025z-5-dataproc-staging/google-cloud-dataproc-metainfo/5acb7508-bc6f-43ea-8e93-c3af504b8bf2/jobs/599fe522712b47689edeed3c9a946361/driveroutput
+    jobUuid: 02e3ef2b-a0d5-32a5-b035-a1085a6e1849
+    placement:
+      clusterName: tbd-cluster
+      clusterUuid: 5acb7508-bc6f-43ea-8e93-c3af504b8bf2
+    pysparkJob:
+      mainPythonFileUri: gs://tbd-2025z-5-code/spark-job.py
+    reference:
+      jobId: 599fe522712b47689edeed3c9a946361
+      projectId: tbd-2025z-5
+    status:
+      state: DONE
+      stateStartTime: '2025-11-13T14:33:32.342647Z'
+    statusHistory:
+    - state: PENDING
+      stateStartTime: '2025-11-13T14:31:14.637884Z'
+    - state: SETUP_DONE
+      stateStartTime: '2025-11-13T14:31:14.659482Z'
+    - details: Agent reported job success
+      state: RUNNING
+      stateStartTime: '2025-11-13T14:31:14.880951Z'
+    yarnApplications:
+    - name: Shakespeare WordCount
+      progress: 1.0
+      state: FINISHED
+      trackingUrl: http://tbd-cluster-m.c.tbd-2025z-5.internal.:8088/proxy/application_1763040807341_0010/
+  </pre>
     
     
     

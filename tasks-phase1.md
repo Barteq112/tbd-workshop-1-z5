@@ -69,7 +69,7 @@ API pozostanie aktywne nawet po usunięciu infrastruktury Terraformem.
 For all the resources of type: `google_artifact_registry`, `google_storage_bucket`, `google_service_networking_connection`
 create a sample usage profiles and add it to the Infracost task in CI/CD pipeline. Usage file [example](https://github.com/infracost/infracost/blob/master/infracost-usage-example.yml)
 
-We used infracost-usage.yml file to define the expected consumption. The file is located in the root directory of the project. Content (note: the values are only for example purposes):
+Użyliśmy pliku infracost-usage.yml, aby określić przewidywane zużycie zasobów. Plik znajduje się w głównym katalogu projektu. Zawartość poniżej (uwaga: wartości są jedynie przykładowe):
 <pre> version: 0.1
 
 resource_usage:
@@ -99,7 +99,7 @@ google_service_networking_connection.my_connection:
       oceania: 0                     # Indonesia and Oceania to/from any Google Cloud region.
       worldwide: 0                 # to a Google Cloud region on another continent. </pre>
       
-Infracost output assuming usage above:
+Wynik działania Infracost przy założeniu powyższego zużycia:
 <pre> Project: mlops
 Module path: mlops
 

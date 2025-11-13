@@ -202,7 +202,7 @@ Module path: mlops
     ***describe the cause and how to find the error***
     
     Skrypt został uruchomiony przez GCP Cloud Shell.
-    Skrypt spark-job.py wkazywał na bucket o nazwie gs://tbd-2025z-9901-data/data/shakespeare/, aby zapisać wyniki za pomocą df.write.orc(). Spark nie mógł znaleźć podanego bucketa i zwrócił błąd:
+    Skrypt spark-job.py wskazywał na bucket o nazwie gs://tbd-2025z-9901-data/data/shakespeare/, aby zapisać wyniki za pomocą df.write.orc(). Spark nie mógł znaleźć podanego bucketa i zwrócił błąd:
     <pre> 
     py4j.protocol.Py4JJavaError: An error occurred while calling o96.orc.
     : com.google.cloud.hadoop.repackaged.gcs.com.google.api.client.googleapis.json.GoogleJsonResponseException: 404 Not Found
@@ -219,7 +219,7 @@ Module path: mlops
       "message": "The specified bucket does not exist."
     } 
     </pre>
-    W konsoli GCP pojawił się komunikat o błędzie z nazwą brakującego bucketa. Po zmiane nazwy bucketa zadania zakończyło się sukcesem.
+    W konsoli GCP pojawił się komunikat o błędzie z nazwą brakującego bucketa. Po zmianie nazwy bucketa zadanie zakończyło się sukcesem.
     <pre>
     Job [599fe522712b47689edeed3c9a946361] finished successfully.
     done: true

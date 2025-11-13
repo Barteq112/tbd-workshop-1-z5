@@ -61,8 +61,9 @@ API pozostanie aktywne nawet po usunięciu infrastruktury Terraformem.
 9. Draw an architecture diagram (e.g. in draw.io) that includes:
     1. Description of the components of service accounts
     2. List of buckets for disposal
-    
-    ***place your diagram here***
+       
+    ![img.png](images/Screenshot6.png)
+  
 
 10. Create a new PR and add costs by entering the expected consumption into Infracost
 For all the resources of type: `google_artifact_registry`, `google_storage_bucket`, `google_service_networking_connection`
@@ -198,8 +199,6 @@ Module path: mlops
     Pliki ORC mają metadane zapisane w pliku. W przeciwieństwie do takich formatów jak CSV czy JSON te nie potrzebują schematu, gdyż zawierają w sobie informacje o typie kolumn, nazwach kolumn, typie kompresji i podstawowych statystykach (np. min, max).
     
 13. Find and correct the error in spark-job.py
-
-    ***describe the cause and how to find the error***
     
     Skrypt został uruchomiony przez GCP Cloud Shell.
     Skrypt spark-job.py wskazywał na bucket o nazwie gs://tbd-2025z-9901-data/data/shakespeare/, aby zapisać wyniki za pomocą df.write.orc(). Spark nie mógł znaleźć podanego bucketa i zwrócił błąd:
